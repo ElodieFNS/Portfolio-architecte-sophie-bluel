@@ -44,4 +44,24 @@ async function fetchData(){ //fonction asynchrone
   }
 }
 
+
+
+async function addFilters(){
+  let h2 = document.querySelector("#portfolio h2");
+  let filtersDiv = document.createElement("div");
+  filtersDiv.classList.add("filtres")
+
+  let filtreTous = document.createElement("button");
+  filtreTous.textContent = "Tous";
+  filtreTous.category.id = "1" + "2" + "3";
+  filtreTous.classList.add("filter_button")
+
+  let filtreObjets = document.createElement("button");
+  filtreObjets.textContent = data.category.name;
+  filtreObjets.classList.add("filter_button")
+
+
+}
+
 fetchData()
+addFilters()
