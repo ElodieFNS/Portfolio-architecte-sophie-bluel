@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => { //traite les données JSON renvoyées par l'API après une connexion réussie
             localStorage.setItem('token', data.token); //stock token d'authentificztion dans "localStorage"
             console.log('Connexion réussie');
-            //window.location.href = '/dashboard.html';
+            window.location.href = '/Portfolio-architecte-sophie-bluel/FrontEnd/index.html';
         })
         .catch(error => {
             console.error('Erreur:', error);
