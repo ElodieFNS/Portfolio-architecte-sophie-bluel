@@ -164,6 +164,23 @@ li:hover {
 	background-color: #1D6154;
 }
 
+a{
+	text-decoration: none;
+	color: black;
+}
+
+.active{
+	font-weight: 600;
+}
+
+.passwordForget{
+	display: flex;
+	justify-content: center;
+	text-decoration: underline;
+	font-weight: 500;
+	color: #3D3D3D;
+}
+
 #contact {
 	width: 50%;
 margin: auto;

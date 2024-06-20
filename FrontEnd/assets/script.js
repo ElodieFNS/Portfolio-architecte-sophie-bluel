@@ -1,5 +1,5 @@
 // URL de l'API à partir de laquelle récupérer les données
-const apiUrl = 'http://localhost:5678/api/works';
+const apiUrlWorks = 'http://localhost:5678/api/works';
 
 // Fonction pour créer et ajouter des balises d'image dans la galerie
 function createImageElements(data) {
@@ -87,7 +87,7 @@ function addFilterButtons(data) {
 async function fetchData() {
     try {
         // Effectue une requête GET à l'API
-        const response = await fetch(apiUrl);
+        const response = await fetch(apiUrlWorks);
 
         // Vérifie si la requête est réussie
         if (!response.ok) {
@@ -109,6 +109,55 @@ async function fetchData() {
     }
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    const currentPage = window.location.pathname; //permet de savoir sur quelle page l'utilisateur se trouve actuellement et de le stocker
+    const loginLink = document.querySelector('.login');
+
+    if (currentPage.includes('login.html')) {
+        loginLink.classList.add('active');
+    }
+});
+
+
+document.getElementById('loginForm').addEventListener('submit', function(event){
+    event.preventDefault(); // empeche l'envoi par défaut du formulaire
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    const apiUrlLogin = 'http://localhost:5678/api/users/login';
+
+    const data = { //envoies de données à l'api sous forme json
+        email: email,
+        password: password
+    };
+
+    const requestOptions = { //option pour la requete fetch
+        method: 'POST', //méthode post pour envoyer données
+        headers: {
+            'Content-Type': 'application/json' //défini que tu JSON est envoyé
+        },
+        body: JSON.stringify(data) //converti l'objet "data" en JSION pour l'envoie
+    };
+
+    fetch(apiUrlLogin, requestOptions) //envoie requete POST
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur de connexion');
+        }
+        return response.json(); // Conversion de la réponse en JSON
+    })
+    .then(data => { //traite les données JSON renvoyées par l'API après une connexion réussie
+        localStorage.setItem('token', data.token); //stock token d'authentificztion dans "localStorage"
+        console.log('Connexion réussie');
+        //window.location.href = '/dashboard.html';
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+        document.getElementById('error-message').textContent = 'Identifiants incorrects. Veuillez réessayer.';
+    });
+
+});
 // Appelle la fonction fetchData pour démarrer le processus
 fetchData();
 
