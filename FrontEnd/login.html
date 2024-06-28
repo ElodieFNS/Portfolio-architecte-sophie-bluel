@@ -9,7 +9,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script src="./assets/script.js"></script>
+	<script src="./assets/scriptlogin.js"></script>
 </head>
 <body>
     <header>
@@ -27,11 +27,12 @@
         <section id="contact">
             <h2>Log In</h2>
             <form id="loginForm" action="#" method="post">
-                <label for="name">E-mail</label>
+                <label for="email">E-mail</label>
                 <input type="email" name="email" id="email">
-                <label for="email">Mot de passe</label>
+                <label for="pass">Mot de passe</label>
                 <input type="password" name="password" id="password"><br>
-                <input type="submit" value="Connexion">
+                <p id="error-message"></p>
+                <input type="submit" value="Connexion">   
                 <a href="#" class="passwordForget">Mot de passe oublié</a>
             </form>
         </section>

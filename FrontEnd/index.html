@@ -31,6 +31,35 @@
 	</div>	
 </header>
 <main>
+	<button id="openModalButton">Ouvrir la Modale</button>
+    <!-- Modale -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Galerie</h2>
+            <div id="modalGallery" class="gallery"></div>
+        </div>
+    </div>
+
+    <!--<div id="addModal" class="modal">
+        <div class="modal-content">
+            <span class="close-add-modal">&times;</span>
+            <form id="newPhotoForm">
+                <h3>Ajouter une nouvelle photo</h3>
+                <label for="newPhotoTitle">Titre:</label>
+				<input type="text" id="newPhotoTitle" name="title" placeholder="Titre" required>
+
+                <label for="newPhotoUrl">Image:</label>
+                <input type="file" id="newPhotoUrl" name="imageUrl" accept="image/*" required>
+
+                <label for="newPhotoCategory">Catégorie:</label>
+                <select id="newPhotoCategory" name="category" required>
+				</select>
+				<button type="submit">Ajouter</button>
+            </form>
+        </div>
+    </div>--> 
+
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
@@ -42,10 +71,10 @@
 			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
 	</section>
+	
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
 		<div class="gallery">
-			
 		</div>
 	</section>
 	<section id="contact">
