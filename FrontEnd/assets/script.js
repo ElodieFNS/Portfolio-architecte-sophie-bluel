@@ -1,47 +1,30 @@
 // URL de l'API à partir de laquelle récupérer les données
 const apiUrlWorks = 'http://localhost:5678/api/works';
 
-// Fonction pour vider la galerie
-function clearGallery() {
+// Fonction pour créer et ajouter des balises d'image dans la galerie
+function createImageElements(data) {
     let gallery = document.querySelector(".gallery");
     gallery.innerHTML = ''; // Efface le contenu précédent de la galerie
-}
-
-// Fonction pour créer un élément <img>
-function createImageElement(imageUrl, title) {
-    let img = document.createElement("img");
-    img.src = imageUrl;
-    img.alt = title; // Texte alternatif pour l'accessibilité
-    img.classList.add("image");
-    return img;
-}
-
-// Fonction pour créer un élément figcaption
-function createFigcaptionElement(title) {
-    let figcaption = document.createElement("figcaption");
-    figcaption.textContent = title;
-    figcaption.classList.add("title");
-    return figcaption;
-}
-
-// Fonction pour créer un élément <figure> contenant l'image et la légende
-function createFigureElement(img, figcaption) {
-    let figure = document.createElement("figure");
-    figure.classList.add("figure");
-    figure.appendChild(img);
-    figure.appendChild(figcaption);
-    return figure;
-}
-
-// Fonction principale pour créer les éléments d'image et les ajouter à la galerie
-function createImageElements(data) {
-    clearGallery();
-    let gallery = document.querySelector(".gallery");
 
     data.forEach(item => {
-        let img = createImageElement(item.imageUrl, item.title);
-        let figcaption = createFigcaptionElement(item.title);
-        let figure = createFigureElement(img, figcaption);
+        // Création de l'élément <img> pour chaque image
+        let img = document.createElement("img");
+        img.src = item.imageUrl;
+        img.alt = item.title; // Texte alternatif pour l'accessibilité
+        img.classList.add("image");
+
+        // Création de la légende pour chaque image
+        let figcaption = document.createElement("figcaption");
+        figcaption.textContent = item.title;
+        figcaption.classList.add("title");
+
+        // Création du conteneur <figure> pour chaque image et légende
+        let figure = document.createElement("figure");
+        figure.classList.add("figure");
+        figure.appendChild(img);
+        figure.appendChild(figcaption);
+
+        // Ajout du <figure> à la galerie
         gallery.appendChild(figure);
     });
 }

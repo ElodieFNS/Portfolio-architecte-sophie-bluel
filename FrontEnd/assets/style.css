@@ -185,6 +185,7 @@ a{
 
 .headerEditionMod{
 	margin-top: 0;
+
 }
 
 .editionMod{
@@ -192,6 +193,9 @@ a{
 	background-color: black;
 	display: flex;
 	justify-content: center;
+	margin-left: -200px;
+    margin-right: -185px;
+	height: 60px;
 }
 
 .band{
@@ -241,6 +245,8 @@ a{
     flex-wrap: wrap;
     gap: 10px;
 }
+
+
 
 figure {
     margin: 0;
