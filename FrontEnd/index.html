@@ -38,27 +38,32 @@
             <span class="close">&times;</span>
             <h2>Galerie</h2>
             <div id="modalGallery" class="galleryModal"></div>
+			<button id="addPhotoBtn">Ajouter une photo</button>
         </div>
     </div>
-
-    <!--<div id="addModal" class="modal">
-        <div class="modal-content">
-            <span class="close-add-modal">&times;</span>
-            <form id="newPhotoForm">
-                <h3>Ajouter une nouvelle photo</h3>
-                <label for="newPhotoTitle">Titre:</label>
-				<input type="text" id="newPhotoTitle" name="title" placeholder="Titre" required>
-
-                <label for="newPhotoUrl">Image:</label>
-                <input type="file" id="newPhotoUrl" name="imageUrl" accept="image/*" required>
-
-                <label for="newPhotoCategory">Catégorie:</label>
-                <select id="newPhotoCategory" name="category" required>
+	<!-- Modale de téléchargement -->
+	<div id="uploadModal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<h2>Ajouter une Nouvelle Photo</h2>
+			<form id="uploadForm">
+				<label for="uploadFileInput">Choisir une photo :</label>
+				<input type="file" id="uploadFileInput" name="file" required>
+				<br>
+				<label for="uploadTitleInput">Titre :</label>
+				<input type="text" id="uploadTitleInput" name="title" required>
+				<br>
+				<label for="uploadCategorySelect">Catégorie :</label>
+				<select id="uploadCategorySelect" name="category" required>
+					<option value="1">Objets</option>
+					<option value="2">Appartements</option>
+					<option value="3">Hotels & restaurants</option>
 				</select>
-				<button type="submit">Ajouter</button>
-            </form>
-        </div>
-    </div>--> 
+				<br>
+				<button type="button" id="uploadFileBtn">Télécharger</button>
+			</form>
+		</div>
+	</div>
 
 	<section id="introduction">
 		<figure>
