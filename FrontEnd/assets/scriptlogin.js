@@ -1,7 +1,7 @@
-function addEditModeIndicator() {
-    const editMode = document.querySelector('.editionDiv');
-    editMode.classList.add("editionMod");
-}
+// function addEditModeIndicator() {
+//     const editMode = document.querySelector('.editionDiv');
+//     editMode.classList.add("editionMod");
+// }
 
 function isAuthenticated() {
     const token = localStorage.getItem('token');
@@ -9,15 +9,15 @@ function isAuthenticated() {
 }
 
 // Exécution au chargement du DOM
-document.addEventListener('DOMContentLoaded', function() {
-    // Vérification de l'authentification
-    if (isAuthenticated()) {
-        addEditModeIndicator(); // Ajoute la ligne noire si l'utilisateur est authentifié
-    }
-    else {
-    editMode.style.display = 'none'; // Assure que l'élément est caché si l'utilisateur n'est pas authentifié
-}
-});
+// document.addEventListener('DOMContentLoaded', function() {
+//     // Vérification de l'authentification
+//     if (isAuthenticated()) {
+//         addEditModeIndicator(); // Ajoute la ligne noire si l'utilisateur est authentifié
+//     }
+//     else {
+//     editMode.style.display = 'none'; // Assure que l'élément est caché si l'utilisateur n'est pas authentifié
+// }
+// });
 
 document.addEventListener('DOMContentLoaded', function() {
     const currentPage = window.location.pathname; //permet de savoir sur quelle page l'utilisateur se trouve actuellement et de le stocker

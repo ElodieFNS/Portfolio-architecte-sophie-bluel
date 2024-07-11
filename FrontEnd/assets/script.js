@@ -110,97 +110,6 @@ async function fetchData() {
     }
 }
 
-// Fonction pour obtenir les données de l'API et afficher les photos dans la modale
-// document.addEventListener('DOMContentLoaded', function() {
-//     // Fonction pour ouvrir la modale
-//     function openModal() {
-//         document.getElementById('myModal').style.display = "block";
-//         fetchPhotos(); // Charger les photos lorsque la modale est ouverte
-//     }
-
-//     // Fonction pour fermer la modale
-//     function closeModal() {
-//         document.getElementById('myModal').style.display = "none";
-//     }
-
-//     // Ouvrir la modale au clic sur le bouton
-//     document.getElementById('openModalButton').addEventListener('click', openModal);
-
-//     // Fermer la modale au clic sur le <span> de fermeture
-//     document.querySelector('.close').addEventListener('click', closeModal);
-
-//     // Fermer la modale au clic à l'extérieur de celle-ci
-//     window.addEventListener('click', function(event) {
-//         if (event.target === document.getElementById('myModal')) {
-//             closeModal();
-//         }
-//     });
-
-//     // Fonction pour vider la galerie de la modale
-//     function clearModalGallery() {
-//         const gallery = document.getElementById('modalGallery');
-//         gallery.innerHTML = ''; // Efface le contenu précédent de la galerie
-//     }
-
-//     // Fonction pour créer les éléments d'image et les ajouter à la galerie de la modale
-//     function createModalImageElements(data) {
-//         clearModalGallery();
-//         const gallery = document.getElementById('modalGallery');
-
-//         data.forEach(item => {
-//             const img = document.createElement('img');
-//             img.src = item.imageUrl;
-//             img.alt = item.title;
-
-//             const figcaption = document.createElement('figcaption');
-//             figcaption.textContent = item.title;
-
-//             const figure = document.createElement('figure');
-//             figure.appendChild(img);
-//             figure.appendChild(figcaption);
-
-//             const deleteButton = document.createElement('button');
-//             deleteButton.textContent = 'Supprimer';
-//             deleteButton.onclick = () => deletePhoto(item.id);
-
-//             figure.appendChild(deleteButton);
-//             gallery.appendChild(figure);
-//         });
-//     }
-
-//     // Fonction pour obtenir les données de l'API et afficher les photos dans la modale
-//     function fetchPhotos() {
-//         const apiUrl = 'http://localhost:5678/api/works'; // Remplacez par l'URL de votre API
-
-//         fetch(apiUrl)
-//             .then(response => response.json())
-//             .then(data => {
-//                 createModalImageElements(data);
-//             })
-//             .catch(error => {
-//                 console.error('Erreur:', error);
-//             });
-//     }
-
-//     // Fonction pour supprimer une photo
-//     function deletePhoto(photoId) {
-//         const apiUrl = `http://localhost:5678/api/works/${photoId}`;
-
-//         fetch(apiUrl, {
-//             method: 'DELETE',
-//             headers: {
-//                 'Authorization': `Bearer ${localStorage.getItem('token')}`
-//             }
-//         })
-//         .then(() => {
-//             fetchPhotos(); // Met à jour la galerie après la suppression
-//         })
-//         .catch(error => {
-//             console.error('Erreur:', error);
-//         });
-//     }
-// });
-
 
 // Fonction pour obtenir les données de l'API et afficher les photos dans la modale
 document.addEventListener('DOMContentLoaded', function() {
@@ -208,15 +117,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const openModalButton = document.getElementById('openModalButton');
     const myModal = document.getElementById('myModal');
     const closeModalButton = myModal.querySelector('.close');
-    const addPhotoBtn = document.getElementById('addPhotoBtn'); // **Nouvelle ligne**
+    const addPhotoBtn = document.getElementById('addPhotoBtn');
 
     // Récupérer les éléments de la modale de téléchargement
-    const uploadModal = document.getElementById('uploadModal'); // **Nouvelle ligne**
-    const closeUploadModalBtn = uploadModal.querySelector('.close'); // **Nouvelle ligne**
-    const uploadFileInput = document.getElementById('uploadFileInput'); // **Nouvelle ligne**
-    const uploadTitleInput = document.getElementById('uploadTitleInput'); // **Nouvelle ligne**
-    const uploadCategorySelect = document.getElementById('uploadCategorySelect'); // **Nouvelle ligne**
-    const uploadFileBtn = document.getElementById('uploadFileBtn'); // **Nouvelle ligne**
+    const uploadModal = document.getElementById('uploadModal');
+    const closeUploadModalBtn = uploadModal.querySelector('.close');
+    const uploadFileInput = document.getElementById('uploadFileInput'); 
+    const uploadTitleInput = document.getElementById('uploadTitleInput'); 
+    const uploadCategorySelect = document.getElementById('uploadCategorySelect'); 
+    const uploadFileBtn = document.getElementById('uploadFileBtn'); 
 
     // Fonction pour ouvrir la modale de galerie
     function openModal() {
@@ -242,12 +151,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // **Nouvelle fonction pour ouvrir la modale de téléchargement**
+    // ouverture modale téléchargement
     addPhotoBtn.onclick = function() {
         uploadModal.style.display = 'block';
     }
 
-    // **Nouvelle fonction pour fermer la modale de téléchargement**
+    // fermeture modale téléchargement
     closeUploadModalBtn.onclick = function() {
         uploadModal.style.display = 'none';
     }
@@ -256,25 +165,25 @@ document.addEventListener('DOMContentLoaded', function() {
     window.onclick = function(event) {
         if (event.target == myModal) {
             myModal.style.display = 'none';
-        } else if (event.target == uploadModal) { // **Nouvelle condition**
+        } else if (event.target == uploadModal) { 
             uploadModal.style.display = 'none';
         }
     }
 
-    // **Nouvelle fonction pour gérer le chargement du fichier et l'envoi à l'API**
-    uploadFileBtn.onclick = function() {
-        const file = uploadFileInput.files[0];
+    // gérer le chargement du fichier et l'envoi à l'API
+    uploadFileBtn.onclick = function() { //quand clique sur le bouton déclenche  la fonction
+        const imageUrl = uploadFileInput.files[0];
         const title = uploadTitleInput.value;
         const category = uploadCategorySelect.value;
     
-        if (file && title && category) {
-            const formData = new FormData();
-            formData.append('file', file);
+        if (imageUrl && title && category) { //définis que les variables ne sont pas vides
+            const formData = new FormData(); //nouvel objet FormData qui est utilisé pour construire des paires clé-valeur à envoyer dans la requête HTTP
+            formData.append('imageUrl', imageUrl);
             formData.append('title', title);
             formData.append('categoryId', category);
-            formData.append('userId', 1); // Assurez-vous que userId est correctement défini selon votre logique d'authentification ou de gestion d'utilisateur
+            formData.append('userId', 1);
     
-            fetch(apiUrlWorks, {
+            fetch(apiUrlWorks, { //equête POST vers l'URL
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -366,122 +275,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Appel initial pour récupérer et afficher les données
     fetchData();
 });
-
-
-
-/*document.addEventListener('DOMContentLoaded', function() {
-
-    // Fonction pour ouvrir la modale d'ajout de photo
-    function openAddModal() {
-        document.getElementById('addModal').style.display = "block";
-    }
-
-    // Fonction pour fermer la modale d'ajout de photo
-    function closeAddModal() {
-        document.getElementById('addModal').style.display = "none";
-    }
-
-    // Ouvrir la modale d'ajout de photo au clic sur le bouton "Ajouter une Photo"
-    document.getElementById('addPhotoButton').addEventListener('click', openAddModal);
-
-    // Fermer la modale d'ajout de photo au clic sur le <span> de fermeture
-    document.querySelector('.close-add-modal').addEventListener('click', closeAddModal);
-
-    // Fermer la modale d'ajout de photo au clic à l'extérieur de celle-ci
-    window.addEventListener('click', function(event) {
-        if (event.target === document.getElementById('addModal')) {
-            closeAddModal();
-        }
-    });
-
-    // Soumission du formulaire pour ajouter une nouvelle photo
-    document.getElementById('newPhotoForm').addEventListener('submit', async function(event) {
-        event.preventDefault();
-
-        const title = document.getElementById('newPhotoTitle').value;
-        const imageUrl = document.getElementById('newPhotoUrl').files[0];
-        const category = document.getElementById('newPhotoCategory').value;
-        const apiUrl = 'http://localhost:5678/api/works';
-
-        const formData = new FormData();
-        formData.append('title', title);
-        formData.append('imageUrl', imageUrl);
-        formData.append('category', category);
-
-        try {
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                },
-                body: formData
-            });
-
-            if (!response.ok) {
-                const errorMessage = await response.text();
-                throw new Error(errorMessage);
-            }
-
-            const data = await response.json();
-            console.log('Photo ajoutée avec succès:', data);
-            fetchPhotos();
-            closeAddModal(); // Fermer la modale d'ajout après succès
-        } catch (error) {
-            console.error('Erreur:', error);
-        }
-    });
-
-    // Fonction pour vider la galerie de la modale
-    function clearModalGallery() {
-        const gallery = document.getElementById('modalGallery');
-        gallery.innerHTML = ''; // Efface le contenu précédent de la galerie
-    }
-
-    // Fonction pour créer les éléments d'image et les ajouter à la galerie de la modale
-    function createModalImageElements(data) {
-        clearModalGallery();
-        const gallery = document.getElementById('modalGallery');
-
-        data.forEach(item => {
-            const img = createImageElement(item.imageUrl, item.title);
-            const figcaption = createFigcaptionElement(item.title);
-            const figure = createFigureElement(img, figcaption);
-            gallery.appendChild(figure);
-
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Supprimer';
-            deleteButton.onclick = () => deletePhoto(item.id);
-
-            figure.appendChild(deleteButton);
-        });
-    }
-
-    // Fonction pour obtenir les données de l'API et afficher les photos dans la modale principale
-    function fetchPhotos() {
-        const apiUrl = 'http://localhost:5678/api/works';
-
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                createModalImageElements(data);
-
-                // Extraire et mettre à jour les catégories
-                const categories = extractCategoriesFromWorks(data);
-                updateCategorySelect(categories);
-            })
-            .catch(error => {
-                console.error('Erreur:', error);
-            });
-    }
-
-    // Appeler fetchPhotos pour charger les photos quand l'utilisateur est connecté et afficher la modale principale
-    const token = localStorage.getItem('token');
-    if (token) {
-        document.getElementById('myModal').style.display = 'block';
-        fetchPhotos();
-    }
-});
-*/
 
 // Appelle la fonction fetchData pour démarrer le processus
 fetchData();
