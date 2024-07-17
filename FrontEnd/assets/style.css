@@ -188,7 +188,7 @@ a{
 
 }
 
-.editionMod{
+#editionMod{
 	color: white;
 	background-color: black;
 	display: flex;
