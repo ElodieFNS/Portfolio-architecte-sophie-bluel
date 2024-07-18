@@ -33,11 +33,14 @@ function createImageElements(data) {
 // Fonction pour ajouter dynamiquement des boutons de filtre basés sur les catégories disponibles
 function addFilterButtons(data) {
     // Sélectionne l'élément <h2> dans la section avec l'id "portfolio"
-    let h2 = document.querySelector("#portfolio h2");
+    let buttonModal = document.getElementById("butonModal");
 
     // Crée un conteneur <div> pour les filtres
     let filtersDiv = document.createElement("div");
     filtersDiv.classList.add("filters");
+
+    // Insère le conteneur de filtres après l'élément buttonModal
+    buttonModal.insertAdjacentElement('afterend', filtersDiv);
 
     // Tableau des catégories uniques à partir des données
     const categories = Array.from(new Set(data.map(item => item.category.name)));
@@ -266,8 +269,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 figure.appendChild(figcaption);
 
                 const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Supprimer';
                 deleteButton.onclick = () => deletePhoto(item.id);
+                const icon = document.createElement('i');
+                icon.classList.add('fa-solid', 'fa-trash-can', 'butonDelete');
+                deleteButton.appendChild(icon);
 
                 figure.appendChild(deleteButton);
                 gallery.appendChild(figure);

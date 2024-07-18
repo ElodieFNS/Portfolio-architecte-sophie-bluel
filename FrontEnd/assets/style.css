@@ -225,6 +225,28 @@ a{
     justify-content: space-between;
 }
 
+#butonModal{
+	display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+
+.iconChange{
+	margin-right: 10px;
+}
+
+#openModalButton{
+	height: 18px;
+	font-family: Work Sans;
+	border: none;
+	background-color: white;
+	color: black;
+	font-weight: 500;
+	font-size: 15px;
+	margin-left: 10px;
+	padding-top: 8px;
+}
+
 /* Style pour la modale */
 .modal {
     display: none; /* Masquée par défaut */
@@ -239,12 +261,34 @@ a{
     background-color: rgba(0,0,0,0.4);
 }
 
+#h2Modal{
+	display: flex;
+    justify-content: center;
+	color: black;
+	font-size: 26px;
+	font-weight: 400;
+	font-family: 'Work Sans';
+}
+
+.modal-content h2{
+	padding-top: 40px;
+}
+
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
+    border-radius: 2%;
+    width: 40%;
+    height: auto;
+}
+
+#modalGallery{
+	display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    margin: 60px;
 }
 
 .close {
@@ -261,15 +305,6 @@ a{
     cursor: pointer;
 }
 
-/* Style pour la galerie */
-/* .gallery {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-} */
-
-
-
 figure {
     margin: 0;
     position: relative;
@@ -283,22 +318,41 @@ figure img {
 
 figure button {
     position: absolute;
-    bottom: 10px;
-    left: 50%;
+    bottom: 85%;
+    left: 100px;
     transform: translateX(-50%);
-    padding: 5px 10px;
-    background-color: red;
+    padding: 5px 5px;
     color: white;
     border: none;
     cursor: pointer;
+    background-color: black;
+    border-radius: 20%;
 }
 
-figure button:hover {
-    background-color: darkred;
+.custom-hr {
+    border: none;
+	width: 420px;
+    border-top: 1px solid #B3B3B3; /* Couleur et épaisseur de la ligne */
+    margin-bottom: 40px;
+	margin-top: 40px; /* Espacement autour de la ligne */
+	margin-left: 160px;
+}
+
+#addPhotoBtn{
+	background-color: #1D6154;
+	color: white;
+	border: none;
+	border-radius: 20px;
+	width: 237px;
+	height: 40px;
+	margin-left: 34%;
+	font-family: 'Syne';
+	font-weight: 700;
+	margin-bottom: 40px;
 }
 
 #contact {
-	width: 50%;
+	width: 30%;
 margin: auto;
 }
 #contact > * {
