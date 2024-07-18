@@ -160,12 +160,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const uploadTitleInput = document.getElementById('uploadTitleInput'); 
         const uploadCategorySelect = document.getElementById('uploadCategorySelect'); 
         const uploadFileBtn = document.getElementById('uploadFileBtn');
+        const backToGallery = document.getElementById('backToGallery');
 
        
 
         // Fonction pour ouvrir la modale de galerie
         function openModal() {
             myModal.style.display = "block";
+            uploadModal.style.display = "none";
             fetchPhotos(); // Charger les photos lorsque la modale est ouverte
         }
 
@@ -190,11 +192,18 @@ document.addEventListener('DOMContentLoaded', function() {
         // ouverture modale téléchargement
         addPhotoBtn.onclick = function() {
             uploadModal.style.display = 'block';
+            myModal.style.display = 'none';
+
         }
 
         // fermeture modale téléchargement
         closeUploadModalBtn.onclick = function() {
             uploadModal.style.display = 'none';
+        }
+
+        backToGallery.onclick = function() {
+            uploadModal.style.display = 'none';
+            myModal.style.display = 'block';
         }
 
         // Fermer la modale au clic à l'extérieur de celle-ci

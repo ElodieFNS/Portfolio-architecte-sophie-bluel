@@ -351,6 +351,11 @@ figure button {
 	margin-bottom: 40px;
 }
 
+#uploadFile{
+	background-color: #E8F1F6;
+	display: flex;
+}
+
 #contact {
 	width: 30%;
 margin: auto;

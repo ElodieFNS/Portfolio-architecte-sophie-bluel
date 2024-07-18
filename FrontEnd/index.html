@@ -46,12 +46,15 @@
 	<!-- Modale de téléchargement -->
 	<div id="uploadModal" class="modal">
 		<div class="modal-content">
+			<i class="fa-solid fa-arrow-left" id="backToGallery"></i>
 			<span class="close">&times;</span>
-			<h2>Ajouter une Nouvelle Photo</h2>
+			<h2>Ajout photo</h2>
 			<form id="uploadForm">
-				<label for="uploadFileInput">Choisir une photo :</label>
-				<input type="file" id="uploadFileInput" name="file" required>
-				<br>
+				<div id="uploadFile">
+					<label for="uploadFileInput"></label>
+					<input type="file" id="uploadFileInput" name="file" required>
+					<br>
+				</div>
 				<label for="uploadTitleInput">Titre :</label>
 				<input type="text" id="uploadTitleInput" name="title" required>
 				<br>
