@@ -130,6 +130,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const updateHeader = document.getElementById('header');
         updateHeader.classList.add('headerEditionMod');
+        const updateBody = document.getElementById('body');
+        updateBody.classList.add('bodyEditionMod');
+        const updateMain = document.getElementById('main');
+        updateMain.classList.add('mainEditionMod');
+        const upadteTitle = document.getElementById('band');
+        upadteTitle.classList.add('bandEditionMod');
+
 
     };
 });

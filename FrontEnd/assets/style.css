@@ -49,8 +49,8 @@ table {
 }
 /** end reset css**/
 body {
-	max-width: 1140px;
-	margin:auto;
+	margin-left:140px;
+	margin-right: 140px;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
@@ -183,19 +183,41 @@ a{
 	color: #3D3D3D;
 }
 
+.bodyEditionMod{
+	margin: 0;
+}
+
 .headerEditionMod{
 	margin-top: 0;
+	margin-right: 0;
+	margin-left: 0;
+	max-width: 2000px;
 
 }
 
-#editionMod{
+.mainEditionMod{
+	margin: 140px;
+}
+
+#band{
+	display: flex;
+    justify-content: space-between;
+}
+.bandEditionMod{
+	margin-right: 140px;
+	margin-left: 140px;
+	margin-top: 40px;
+	display: flex;
+	justify-content: space-between;
+}
+
+#editionDiv{
 	color: white;
 	background-color: black;
 	display: flex;
 	justify-content: center;
-	margin-left: -200px;
-    margin-right: -185px;
-	height: 60px;
+	align-items: center;
+	height: 40px;
 }
 
 .band{
