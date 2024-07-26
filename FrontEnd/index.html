@@ -51,21 +51,29 @@
 			<h2>Ajout photo</h2>
 			<form id="uploadForm">
 				<div id="uploadFile">
-					<label for="uploadFileInput"></label>
+					<i class="fa-regular fa-image iconDownlodImage"></i>
+					<label for="uploadFileInput" class="custom-file-upload">
+						<p>+ Ajouter photo</p>
+					</label>
+					<p id="sizeUpload">jpg, png : 4mo max</p>
 					<input type="file" id="uploadFileInput" name="file" required>
 					<br>
+					<img id="previewImage" alt="Aperçu de l'image">
 				</div>
-				<label for="uploadTitleInput">Titre :</label>
-				<input type="text" id="uploadTitleInput" name="title" required>
-				<br>
-				<label for="uploadCategorySelect">Catégorie :</label>
-				<select id="uploadCategorySelect" name="category" required>
-					<option value="1">Objets</option>
-					<option value="2">Appartements</option>
-					<option value="3">Hotels & restaurants</option>
-				</select>
-				<br>
-				<button type="button" id="uploadFileBtn">Télécharger</button>
+				<div class="uploadDiv">
+					<label for="uploadTitleInput">Titre :</label>
+					<input type="text" id="uploadTitleInput" name="title" required>
+				</div>
+				<div class="uploadDiv">
+					<label for="uploadCategorySelect">Catégorie :</label>
+					<select id="uploadCategorySelect" name="category" required>
+						<option value="1">Objets</option>
+						<option value="2">Appartements</option>
+						<option value="3">Hotels & restaurants</option>
+					</select>
+				</div>
+				<hr class="custom-hr">
+				<button type="button" id="uploadFileBtn">Valider</button>
 			</form>
 		</div>
 	</div>
@@ -87,7 +95,6 @@
 			<button id="openModalButton"><i class="fa-regular fa-pen-to-square"></i>Modifier</i></button>
 			<h2>Mes Projets</h2>
 		</div>
-		
 		<div class="gallery">
 		</div>
 	</section>

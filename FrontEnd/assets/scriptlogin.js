@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
             headers: {
                 'Content-Type': 'application/json' //défini que tu JSON est envoyé
             },
-            body: JSON.stringify(data) //converti l'objet "data" en JSION pour l'envoie
+            body: JSON.stringify(data) //converti l'objet "data" en JSON pour l'envoie
         };
 
         fetch(apiUrlLogin, requestOptions) //envoie requete POST

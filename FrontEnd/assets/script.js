@@ -61,8 +61,6 @@ function addFilterButtons(data) {
         filtersDiv.appendChild(button);
     });
 
-    // Insère les boutons de filtre après l'élément <h2>
-    h2.parentNode.insertBefore(filtersDiv, h2.nextSibling);
 
     function activateButton(button) {
         // Désactive tous les boutons
@@ -254,6 +252,38 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
+        document.getElementById('uploadFileInput').addEventListener('change', function() {
+            var file = this.files[0];
+            var preview = document.getElementById('previewImage');
+            var icon = document.querySelector('.iconDownlodImage');
+            var label = document.querySelector('.custom-file-upload');
+            var sizeText = document.getElementById('sizeUpload');
+            var reader = new FileReader();
+    
+            reader.onloadend = function() {
+                preview.src = reader.result;
+                preview.style.display = 'block';
+                icon.classList.add('hidden');
+                label.classList.add('hidden');
+                sizeText.classList.add('hidden');
+            };
+    
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = '';
+                preview.style.display = 'none';
+                icon.classList.remove('hidden');
+                label.classList.remove('hidden');
+                sizeText.classList.remove('hidden');
+            }
+        });
+    
+        // Permettre de cliquer sur l'image pour réouvrir le sélecteur de fichiers
+        document.getElementById('previewImage').addEventListener('click', function() {
+            document.getElementById('uploadFileInput').click();
+        });
+
         // Fonction pour vider la galerie de la modale
         function clearModalGallery() {
             const gallery = document.getElementById('modalGallery');
@@ -300,6 +330,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
         }
 
+        
         // Fonction pour supprimer une photo
         function deletePhoto(photoId) {
             const apiUrl = `http://localhost:5678/api/works/${photoId}`;
