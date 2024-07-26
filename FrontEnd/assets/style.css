@@ -405,7 +405,7 @@ figure button {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 #previewContainer {
