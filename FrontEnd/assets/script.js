@@ -258,11 +258,13 @@ document.addEventListener('DOMContentLoaded', function() {
         var icon = document.querySelector('.iconDownlodImage');
         var label = document.querySelector('.custom-file-upload');
         var sizeText = document.getElementById('sizeUpload');
+        var sizeBox = document.getElementById('uploadFile');
         var reader = new FileReader();
 
         reader.onloadend = function() {
             preview.src = reader.result;
             preview.style.display = 'block';
+            sizeBox.classList.add('uploadFileImg');
             icon.classList.add('hidden');
             label.classList.add('hidden');
             sizeText.classList.add('hidden');
