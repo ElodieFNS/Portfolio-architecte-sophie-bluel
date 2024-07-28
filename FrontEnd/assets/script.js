@@ -115,7 +115,7 @@ async function fetchData() {
 function logout() {
     console.log('Déconnexion en cours...');
     localStorage.removeItem('token'); // Supprime le token
-    window.location.href = '/Portfolio-architecte-sophie-bluel/FrontEnd/index.html'; // Redirige vers la page d'accueil
+    window.location.href = 'index.html'; // Redirige vers la page d'accueil
 }
 
 document.addEventListener('DOMContentLoaded', function() {
