@@ -1,6 +1,32 @@
 // URL de l'API à partir de laquelle récupérer les données
 const apiUrlWorks = 'http://localhost:5678/api/works';
 
+// Fonction asynchrone pour récupérer les données de l'API et initialiser l'affichage
+async function fetchData() {
+    try {
+        // Effectue une requête GET à l'API
+        const response = await fetch(apiUrlWorks); // requête HTTP GET à l'URL
+
+        // Vérifie si la requête est réussie
+        if (!response.ok) {
+            throw new Error('Erreur lors de la récupération des données');
+        }
+
+        // Convertit la réponse en format JSON
+        let data = await response.json();
+
+        // Vérifie s'il y a des données à afficher
+        if (data.length > 0) {
+            createImageElements(data); // Affiche toutes les images par défaut
+            addFilterButtons(data); // Ajoute les boutons de filtre basés sur les catégories
+        } else {
+            console.log('Aucune donnée disponible');
+        }
+    } catch (error) {
+        console.error('Erreur :', error);
+    }
+}
+
 // Fonction pour créer et ajouter des balises d'image dans la galerie
 function createImageElements(data) {
     let gallery = document.querySelector(".gallery");
@@ -9,7 +35,7 @@ function createImageElements(data) {
     data.forEach(item => {
         // Création de l'élément <img> pour chaque image
         let img = document.createElement("img");
-        img.src = item.imageUrl;
+        img.src = item.imageUrl; //assigner une url
         img.alt = item.title; // Texte alternatif pour l'accessibilité
         img.classList.add("image");
 
@@ -33,7 +59,7 @@ function createImageElements(data) {
 // Fonction pour ajouter dynamiquement des boutons de filtre basés sur les catégories disponibles
 function addFilterButtons(data) {
     // Sélectionne l'élément <h2> dans la section avec l'id "portfolio"
-    let buttonModal = document.getElementById("butonModal");
+    let buttonModal = document.getElementById("butonModal"); //ligne 94 html
 
     // Crée un conteneur <div> pour les filtres
     let filtersDiv = document.createElement("div");
@@ -42,14 +68,17 @@ function addFilterButtons(data) {
     // Insère le conteneur de filtres après l'élément buttonModal
     buttonModal.insertAdjacentElement('afterend', filtersDiv);
 
-    // Tableau des catégories uniques à partir des données
-    const categories = Array.from(new Set(data.map(item => item.category.name)));
+    //map = créer tableau des noms des categs à partir du tableau data, set = créer un ensemble des noms pour éliminer doublons
+    //arrayw.from = convertir cet ensemble en un tableau
+    //résultat est un tableau "categories" contenant des noms uniques venant du tableau "data"
+    const categories = Array.from(new Set(data.map(item => item.category.name))); 
+
 
     // Crée un bouton "Tous" pour afficher toutes les images
     let allButton = document.createElement("button");
     allButton.textContent = "Tous";
     allButton.classList.add("filter-button", "active");
-    allButton.setAttribute("data-filter", "all");
+    allButton.setAttribute("data-filter", "all"); //data-filter = attibut qui permet de stocker des informations
     filtersDiv.appendChild(allButton);
 
     // Crée des boutons pour chaque catégorie unique
@@ -61,55 +90,30 @@ function addFilterButtons(data) {
         filtersDiv.appendChild(button);
     });
 
-
-    function activateButton(button) {
-        // Désactive tous les boutons
+    //fct pour changer le style du bouton actif ou non
+    function activateButton(button) { //fct qui prend pour arg le bouton activé
+        //Désactive tous les boutons avec la classe filter-button
         document.querySelectorAll(".filter-button").forEach(btn => btn.classList.remove("active"));
         // Active le bouton cliqué
         button.classList.add("active");
     }
 
     // Gestionnaire d'événements pour les boutons de filtre
-    filtersDiv.addEventListener("click", (event) => {
+    filtersDiv.addEventListener("click", (event) => { //creation d'une fonction fléchée pour gérer l'événement click
         if (event.target.classList.contains("filter-button")) {
-            const filter = event.target.getAttribute("data-filter");
+            const filter = event.target.getAttribute("data-filter"); //récupère la valeur de l'attribut data-filter, détermine quel filtre doit etre appliqué
             if (filter === "all") {
                 createImageElements(data); // Affiche toutes les images
             } else {
-                const filteredData = data.filter(item => item.category.name.toLowerCase() === filter);
+                const filteredData = data.filter(item => item.category.name.toLowerCase() === filter); //créer un tableau avec les photos qui ont le filtre souhaité
                 createImageElements(filteredData); // Affiche les images filtrées par catégorie
             }
-            activateButton(event.target);
+            activateButton(event.target); //fonction désactive tous les autres boutons et active visuellement le bouton cliqué
         }
     });
-    allButton.click();
+    allButton.click(); //affiche autimatiquement toutes les images au début
 }
 
-// Fonction asynchrone pour récupérer les données de l'API et initialiser l'affichage
-async function fetchData() {
-    try {
-        // Effectue une requête GET à l'API
-        const response = await fetch(apiUrlWorks);
-
-        // Vérifie si la requête est réussie
-        if (!response.ok) {
-            throw new Error('Erreur lors de la récupération des données');
-        }
-
-        // Convertit la réponse en format JSON
-        let data = await response.json();
-
-        // Vérifie s'il y a des données à afficher
-        if (data.length > 0) {
-            createImageElements(data); // Affiche toutes les images par défaut
-            addFilterButtons(data); // Ajoute les boutons de filtre basés sur les catégories
-        } else {
-            console.log('Aucune donnée disponible');
-        }
-    } catch (error) {
-        console.error('Erreur :', error);
-    }
-}
 
 // Fonction pour gérer la déconnexion
 function logout() {
@@ -118,15 +122,16 @@ function logout() {
     window.location.href = 'index.html'; // Redirige vers la page d'accueil
 }
 
+//fonction pour verifier la connexion de l'utilisateur
 document.addEventListener('DOMContentLoaded', function() {
     // Vérifie si l'utilisateur est authentifié avant d'afficher les éléments de la modale
     if (isAuthenticated()) {
         const updateLogout = document.getElementById('login');
         updateLogout.textContent = 'logout'; // Change le texte en 'logout'
 
-        updateLogout.addEventListener('click', function(event) {
+        updateLogout.addEventListener('click', function(event) { //écouteur d'évènement -> function(event) exécutée quand clic est détecté sur updateLogout
             event.preventDefault(); // Empêche le comportement par défaut du lien
-            logout(); // Gère la déconnexion
+            logout(); // appelle la fonction logout
         });
 
         const updateHeader = document.getElementById('header');
@@ -141,12 +146,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     };
 });
-// Fonction pour obtenir les données de l'API et afficher les photos dans la modale
+
+// Fonction pour obtenir les données de l'API et afficher les photos dans la modale et les upload
 document.addEventListener('DOMContentLoaded', function() {
     // Vérifie si l'utilisateur est authentifié avant d'afficher les éléments de la modale
     if (isAuthenticated()) {
         // Récupérer les éléments de la modale de galerie
-        const openModalButton = document.getElementById('openModalButton');
+        const openModalButton = document.getElementById('openModalButton'); //l 95
         const myModal = document.getElementById('myModal');
         const closeModalButton = myModal.querySelector('.close');
         const addPhotoBtn = document.getElementById('addPhotoBtn');
@@ -160,6 +166,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const uploadFileBtn = document.getElementById('uploadFileBtn');
         const backToGallery = document.getElementById('backToGallery');
 
+        // Fonction pour obtenir les données de l'API et afficher les photos dans la modale
+        function fetchPhotos() { 
+            fetch(apiUrlWorks) //fetch : Envoie une requête HTTP GET à l'URL spécifiée par apiUrlWorks
+                .then(response => response.json()) //Convertit la réponse HTTP en format JSON.
+                .then(data => {
+                    createModalImageElements(data); // Utilise les données JSON pour créer des éléments d'image dans un modal en appelant createModalImageElements
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                });
+        }
        
 
         // Fonction pour ouvrir la modale de galerie
@@ -215,17 +232,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // gérer le chargement du fichier et l'envoi à l'API
         uploadFileBtn.onclick = function() { //quand clique sur le bouton déclenche  la fonction
-            const imageUrl = uploadFileInput.files[0];
-            const title = uploadTitleInput.value;
+            const imageUrl = uploadFileInput.files[0]; //Récupère le premier fichier sélectionné par l'utilisateur dans un élément <input type="file">
+            const title = uploadTitleInput.value; //récupère le texte rentré par l'utilisateur
             const category = uploadCategorySelect.value;
         
-            if (imageUrl && title && category) { //définis que les variables ne sont pas vides
-                const formData = new FormData(); //nouvel objet FormData qui est utilisé pour construire des paires clé-valeur à envoyer dans la requête HTTP
-                formData.append('image', imageUrl);
+            if (imageUrl && title && category) { //Vérifie que tous les champs requis sont remplis
+                const formData = new FormData(); //Crée un objet FormData pour envoyer les données via une requête POST
+                formData.append('image', imageUrl); //FormData utilisé pour construire paires clé-valeur pour les données de formulaire, méthodes append ajoutent les données à l'objet formData
                 formData.append('title', title);
                 formData.append('category', category);
         
-                fetch(apiUrlWorks, { //requête POST vers l'URL
+                fetch(apiUrlWorks, { //envoie requête POST vers l'URL avec le jeton d'authentification
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -238,6 +255,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                     return response.json();
                 })
+                //Vérifie si la réponse est correcte, convertit la réponse en JSON, et met à jour l'interface utilisateur en cas de succès
                 .then(data => {
                     console.log('Success:', data);
                     uploadModal.style.display = 'none'; // Fermer la modale après succès
@@ -252,17 +270,18 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        document.getElementById('uploadFileInput').addEventListener('change', function() {
-        var file = this.files[0];
+        //écouteur d'évènement pour élément change, événement se déclenche lorsque l'utilisateur sélectionne un fichier
+        document.getElementById('uploadFileInput').addEventListener('change', function() { 
+        var file = this.files[0]; //récupèere 1er fichier selectionné
         var preview = document.getElementById('previewImage');
         var icon = document.querySelector('.iconDownlodImage');
         var label = document.querySelector('.custom-file-upload');
         var sizeText = document.getElementById('sizeUpload');
         var sizeBox = document.getElementById('uploadFile');
-        var reader = new FileReader();
+        var reader = new FileReader(); //FileReader = API JavaScript intégrée qui permet aux applications web de lire le contenu des fichiers stockés sur l'ordinateur de l'utilisateur.
 
-        reader.onloadend = function() {
-            preview.src = reader.result;
+        reader.onloadend = function() { //Définit une fonction qui s'exécute lorsque la lecture du fichier est terminée
+            preview.src = reader.result; //Définit la source de l'image d'aperçu avec le résultat de la lecture du fichier
             preview.style.display = 'block';
             sizeBox.classList.add('uploadFileImg');
             icon.classList.add('hidden');
@@ -270,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
             sizeText.classList.add('hidden');
         };
 
-        if (file) {
+        if (file) { // Si un fichier est sélectionné, le lecteur de fichier commence à lire le fichier et le convertit en URL de données
             reader.readAsDataURL(file);
         } else {
             preview.src = '';
@@ -320,24 +339,14 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Fonction pour obtenir les données de l'API et afficher les photos dans la modale
-        function fetchPhotos() {
-            fetch(apiUrlWorks)
-                .then(response => response.json())
-                .then(data => {
-                    createModalImageElements(data);
-                })
-                .catch(error => {
-                    console.error('Erreur:', error);
-                });
-        }
+        
 
         
         // Fonction pour supprimer une photo
-        function deletePhoto(photoId) {
-            const apiUrl = `http://localhost:5678/api/works/${photoId}`;
+        function deletePhoto(id) {
+            const apiUrl = `http://localhost:5678/api/works/${id}`;
 
-            fetch(apiUrl, {
+            fetch(apiUrl, { //fonction fetch pour envoyer une requête HTTP à l'URL apiUrl
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`

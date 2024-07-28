@@ -53,11 +53,11 @@
 				<div id="uploadFile">
 					<i class="fa-regular fa-image iconDownlodImage"></i>
 					<label for="uploadFileInput" class="custom-file-upload">
-						<p>+ Ajouter photo</p>
+						+ Ajouter photo
 					</label>
 					<p id="sizeUpload">jpg, png : 4mo max</p>
 					<input type="file" id="uploadFileInput" name="file" required>
-					<img id="previewImage" alt="Aperçu de l'image">
+					<img id="previewImage" src="#" alt="Aperçu de l'image">
 				</div>
 				<div class="uploadDiv">
 					<label for="uploadTitleInput">Titre :</label>
@@ -66,6 +66,7 @@
 				<div class="uploadDiv">
 					<label for="uploadCategorySelect">Catégorie :</label>
 					<select id="uploadCategorySelect" name="category" required>
+						<option value="" disabled selected>Choisissez une catégorie</option>
 						<option value="1">Objets</option>
 						<option value="2">Appartements</option>
 						<option value="3">Hotels & restaurants</option>
@@ -91,7 +92,7 @@
 	
 	<section id="portfolio">
 		<div id="butonModal">
-			<button id="openModalButton"><i class="fa-regular fa-pen-to-square"></i>Modifier</i></button>
+			<button id="openModalButton"><i class="fa-regular fa-pen-to-square"></i>Modifier</button>
 			<h2>Mes Projets</h2>
 		</div>
 		<div class="gallery">
