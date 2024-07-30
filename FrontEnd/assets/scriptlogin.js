@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const requestOptions = { //option pour la requete fetch
             method: 'POST', //méthode post pour envoyer données au serveur
-            headers: {
+            headers: { //les en-têtes de requête
                 'Content-Type': 'application/json' //défini que contenu de la requête est au format JSON
             },
             body: JSON.stringify(data) //converti l'objet "data" en JSON pour l'envoie dans le corps de la requête

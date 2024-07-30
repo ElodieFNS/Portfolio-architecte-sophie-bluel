@@ -147,6 +147,23 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 });
 
+async function updateMainGallery() {
+    try {
+        const response = await fetch(apiUrlWorks); //envoie une requete GET à l'API et stocke le résultat
+        if (!response.ok) {
+            throw new Error('Erreur lors de la récupération des données');
+        }
+        const data = await response.json();
+        if (data.length > 0) {
+            createImageElements(data); //appel à la fonction pour metre à jour la gallerie
+        } else {
+            console.log('Aucune donnée disponible');
+        }
+    } catch (error) {
+        console.error('Erreur :', error);
+    }
+}
+
 // Fonction pour obtenir les données de l'API et afficher les photos dans la modale et les upload
 document.addEventListener('DOMContentLoaded', function() {
     // Vérifie si l'utilisateur est authentifié avant d'afficher les éléments de la modale
@@ -259,7 +276,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(data => {
                     console.log('Success:', data);
                     uploadModal.style.display = 'none'; // Fermer la modale après succès
-                    fetchPhotos(); // Met à jour la galerie après l'ajout d'une nouvelle image
+                    fetchPhotos(); // Met à jour la galerie de la modale
+                    updateMainGallery(); // Met à jour la galerie principale
                 })
                 .catch(error => {
                     console.error('Erreur lors de l\'envoi de la requête:', error);
@@ -353,7 +371,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
             .then(() => {
-                fetchPhotos(); // Met à jour la galerie après la suppression
+                fetchPhotos(); // Met à jour la galerie de la modale
+                updateMainGallery(); // Met à jour la galerie principale
             })
             .catch(error => {
                 console.error('Erreur:', error);
